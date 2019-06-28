@@ -17,6 +17,7 @@
 const morgan = require("morgan");
 const json = require("morgan-json");
 
+// token definitions
 morgan.token("body", function(req, res) {
   return JSON.stringify(req.body);
 });
@@ -36,33 +37,30 @@ morgan.token("language", function(req, res) {
   return req.headers["accept-language"];
 });
 
-const jsonFormat = json({
-  method: ":method",
-  url: ":url",
-  status: ":status",
-  body: ":body",
-  params: ":params",
-  query: ":query",
-  headers: ":headers",
-  "http-version": ":http-version",
-  "remote-ip": ":remote-addr",
-  "remote-user": ":remote-user",
-  length: ":res[content-length]",
-  referrer: ":referrer",
-  "user-agent": ":user-agent",
-  "accept-language": ":language",
-  "response-time": ":response-time ms"
-});
+/**
+ * this function call the stream function of winston, it sends the req contents.
+ * @param {Object} options The options, the configuration of the logging module, mandatory
+ * @param {Object} log The log function, optional
+ * @return {VoidFunction} return nothing
+ */
+module.exports = (options, log = console) => {
+  if (!options || typeof options !== "object") {
+    throw new Error("The options parameter is required and must be an object");
+  }
+  if (log && typeof log !== "object") {
+    throw new Error("The log parameter must be an object");
+  }
 
-module.exports = (log, options) => {
+  log.info("Configuring morgan")
+
   if (options.type === "json") {
     try {
-      return morgan(jsonFormat, {
+      return morgan(json(options.format), {
         // combined, tiny, dev, common, short, json
         stream: log.stream
       });
     } catch (e) {
-      console.error(e);
+      log.error(e);
     }
   } else {
     try {
@@ -71,7 +69,7 @@ module.exports = (log, options) => {
         stream: log.stream
       });
     } catch (e) {
-      console.error(e);
+      log.error(e);
     }
   }
 };

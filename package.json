@@ -7,14 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Studio Webux S.E.N.C",
-  "license": "ISC",
+  "homepage": "https://github.com/studiowebux/webux-logging",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/studiowebux/webux-logging.git"
+  },
+  "license": "SEE LICENSE IN license.txt",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
     "morgan": "^1.9.1",
-    "morgan-json": "^1.1.0",
-    "node-statsd": "^0.1.1",
-    "response-time": "^2.3.2",
-    "winston": "^3.2.1"
+    "morgan-json": "^1.1.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
   }
 }
