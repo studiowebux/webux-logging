@@ -22,20 +22,10 @@
  * @return {VoidFunction} return nothing
  */
 const onRequest = (options, app, log = console) => {
-  if (!options || typeof options !== 'object') {
-    throw new Error("The options parameter is required and must be an object");
-  }
-  if (!app || typeof app !== 'function') {
-    throw new Error("The app parameter is required and must be an express function");
-  }
-  if (log && typeof log !== 'object') {
-    throw new Error("The log parameter must be an object")
-  }
+  log.info("Webux-logging - Configuring the `on request` handler");
 
-  log.info("Configuring the on request handler")
-  
-  app.use(require("./components/morgan")(options, log));
-  log.info("Request handler loaded")
+  app.use(require("./lib/morgan")(options, log));
+  log.info("Webux-logging - Request handler loaded");
 };
 
 /**
@@ -47,9 +37,8 @@ const onRequest = (options, app, log = console) => {
  */
 const onResponse = (options, app, log = console) => {
   // for now we will not log the responses
-  log.info("Configuring the on response handler")
-  log.info("Response handler loaded")
-
+  log.info("Webux-logging - Configuring the `on response` handler");
+  log.info("Webux-logging - Response handler loaded");
 };
 
 module.exports = {

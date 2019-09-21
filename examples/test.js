@@ -4,9 +4,8 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const options = {
-  blacklist: ["password"],
-  // combined, tiny, dev, common, short, json
-  type: "json",
+  type: "json", // combined, tiny, dev, common, short, json
+  blacklist: ["password", "accessToken", "refreshToken"],
   format: {
     method: ":method",
     url: ":url",
@@ -28,6 +27,8 @@ const options = {
 
 webuxLogging.onRequest(options, app);
 webuxLogging.onResponse(options, app);
+
+console.log("webux-logging loaded !");
 
 app.use(
   bodyParser.json({
