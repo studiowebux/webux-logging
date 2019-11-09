@@ -4,7 +4,7 @@ It means that the req/res object from express are redirected using morgan and pr
 
 ## Installation 
 ```bash
-npm i --save webux-logging
+npm i --save @studiowebux/logging
 ```
 
 ## Usage
