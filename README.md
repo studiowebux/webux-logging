@@ -1,3 +1,7 @@
+# DEPRECATED
+
+Please use webux-logger directly [@studiowebux/logger](https://github.com/studiowebux/webux-logger)
+
 # Webux Logging
 This module allows to log everything that go through the req and res.
 It means that the req/res object from express are redirected using morgan and printed on the console or using a custom logger.
